@@ -1,0 +1,1 @@
+SUBSYSTEM=="block", ACTION=="add", ENV{DEVTYPE}=="disk", ATTRS{idVendor}=="abcd", ATTRS{idProduct}=="1234", RUN+="/usr/bin/expansion-usb.sh"
