@@ -9,12 +9,13 @@ int main()
 {
     int fd;
     char buf[100];
-    fd = open("/dev/ttyo",O_RDONLY);
+    fd = open("/dev/test",O_RDONLY);
     if (!fd)
-        printf("Error!!!\n");
-    read(fd,buf,20);
+        printf("Error open!!!\n");
+    if (!read(fd,buf,1))
+        printf("Error read!!!\n");
     buf[20]=0;
-    printf("Input: >>> %s <<<\n",buf);
+    printf("Input: >>> %d <<<\n",*buf);
     close(fd);
 
     return 0;
