@@ -1,0 +1,13 @@
+# Target labels
+ googletest
+# Source files and their labels
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/CMakeFiles/googletest
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/CMakeFiles/googletest.rule
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/CMakeFiles/googletest-complete.rule
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/thirdparty/gooletest/src/googletest-stamp/googletest-install.rule
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/thirdparty/gooletest/src/googletest-stamp/googletest-mkdir.rule
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/thirdparty/gooletest/src/googletest-stamp/googletest-download.rule
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/thirdparty/gooletest/src/googletest-stamp/googletest-update.rule
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/thirdparty/gooletest/src/googletest-stamp/googletest-patch.rule
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/thirdparty/gooletest/src/googletest-stamp/googletest-configure.rule
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/thirdparty/gooletest/src/googletest-stamp/googletest-build.rule

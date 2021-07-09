@@ -1,112 +1,59 @@
-#FROM ros:kinetic
-#RUN apt-get update 
-#RUN apt-get install  ros-kinetic-desktop-full -y
-FROM ubuntu:16.04
+FROM ubuntu:18.04
+RUN apt update
+RUN apt install python3-opencv -y && apt-get install -y wget
 
-#MAINTAINER Gary Bradski
+RUN apt install -y build-essential cmake git pkg-config libgtk-3-dev \
+    libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
+    libxvidcore-dev libx264-dev libjpeg-dev libpng-dev libtiff-dev \
+    gfortran openexr libatlas-base-dev python3-dev python3-numpy \
+    libtbb2 libtbb-dev libdc1394-22-dev
 
-########################################################################
-# Running this docker to set up a shared directory and display with the host:
-#
-# To newly create and build this docker image:
-# ============================================
-#
-# Create a directory <container_name>: 
-#    $ mkdir <container_name>
-# Copy this Dockerfile into that directory:
-#    cp Dockerfile <container_name>/.
-# Move to that directory:
-#    $ cd <container_name>
-# To build the docker file (might have to run with sudo 
-#    $ sudo docker build -t <container_name> .
-#
-# To run the image, or run it again retaining its state 
-# =====================================================
-#    but also exporting display from the container and
-#    sharing a directory between host and container:
-#
-# Allow other processes to share the display:
-#    $ xhost +    #Allows or other processes to capture (show) the display
-# Now run the docker (Usually $DISPLAY is :0) and allow use of the camera -- you may need sudo privalage
-#    $ sudo docker run  -it  -e DISPLAY=$DISPLAY  -v /tmp/.X11-unix:/tmp/.X11-unix \
-#                       --device /dev/video0 \
-#                       -v /<path_to_a host_directory>/<directory_on_host>/:/<directory_path/name>/  <container_name>
-#
-# =======================================================
-# Handy docker commands:
-# List all the docker images
-#    $ sudo docker ps -a  
-# If the docker image is stopped (otherwise can skip the first command below if not stopped)
-#    $ sudo docker start <container ID from ps -a above>
-#    $ sudo docker attach <container ID from ps -a above>
-########################################################################
-# This is a docker file which will, from scratch:
-#
-#   * pull in all the dependencies needed for OpenCV 3.2 including python 2 dependencies
-#   * pull in OpenCV 3.2 and opencv_contrib and build them
-#       + executable files end up in opencv-3.2.0/build/bin
-#   * pull in the Learning OpenCV 3 example code and build it
-#       + executable files end up in Learning_OpenCV-3_examples/build
-#   * To get to the top level directory, just type: cd
-#
-# If you just want to do this "by hand" in your home, replace the "RUN"s below with "sudo"
-#
-# This Docker uses the ubuntu 16.04 version of ffmpeg, which is older than the ones in my other dockerfiles.
-# this shouldn't cause you any problems but definitely *DO NOT* use this for generating audiofiles / movies for redistribution.
-#
-# But it is somewhat less capable than the ones in the ffmpeg containers.
-########################################################################
+RUN mkdir ~/opencv_build && cd ~/opencv_build && git clone https://github.com/opencv/opencv.git 
+RUN git clone https://github.com/opencv/opencv_contrib.git
 
+RUN cd ~/opencv_build/opencv && mkdir build && cd build \
+#   && cmake -D CMAKE_BUILD_TYPE=RELEASE \
+#  -D CMAKE_INSTALL_PREFIX=/usr/local \
+#  -D INSTALL_C_EXAMPLES=ON \
+#  -D INSTALL_PYTHON_EXAMPLES=ON \
+#  -D OPENCV_GENERATE_PKGCONFIG=ON \
+#  -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib/modules \
+#  -DCMAKE_CXX_FLAGS=-std=c++11 \
+#  -DENABLE_PRECOMPILED_HEADERS=OFF \
+#  -D BUILD_EXAMPLES=ON ..
+    && cmake -DCMAKE_CXX_FLAGS=-std=c++11 \
+    -DCMAKE_BUILD_TYPE=RELEASE \
+    -DCMAKE_INSTALL_PREFIX=/usr/local \
+    -DBUILD_EXAMPLES=OFF \
+    -DBUILD_DOCS=OFF \
+    -DBUILD_PERF_TESTS=OFF \
+    -DBUILD_TESTS=OFF \
+    -DINSTALL_C_EXAMPLES=OFF \
+    -DENABLE_PRECOMPILED_HEADERS=OFF \
+    -DWITH_OPENMP=ON \
+    -DWITH_V4L=ON \
+    -DWITH_TBB=ON \
+#    -DWITH_QT=ON \
+    -DWITH_OPENGL=ON \
+    -DWITH_JPEG=ON \
+    -DWITH_FFMPEG=ON \
+    -DWITH_GSTREAMER=ON \
+    -DWITH_OPENCL=ON \
+    -DWITH_GPHOTO2=ON \
+    -DWITH_LIBV4L=ON \
+    -DINSTALL_PYTHON_EXAMPLES=ON \
+    -DBUILD_SHARED_LIBS=ON \
+    -DENABLE_CXX11=ON ..
+#    -DOPENCV_EXTRA_MODULES_PATH=/media/feliz/Safira/GitHub/Gridkey/OpenCV/opencv_contrib-3.3.0/modules \
+#    -DPYTHON_EXECUTABLE=/home/feliz/.envs/gridkey/bin/python ..
 
-# First: get all the dependencies:
-#
-RUN apt-get update
-RUN apt-get install -y cmake git libgtk2.0-dev pkg-config libavcodec-dev \
-libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev \
-libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev unzip
-
-RUN apt-get install -y wget
-
-# Just get a simple editor for convienience (you could just cancel this line)
-RUN apt-get install -y vim
-
-
-# Second: get and build OpenCV 3.2
-#
-RUN cd \
-    && wget https://github.com/opencv/opencv/archive/3.2.0.zip \
-    && unzip 3.2.0.zip \
-    && cd opencv-3.2.0 \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
+RUN cd ~/opencv_build/opencv/build \
     && make -j8 \
-    && make install \
-    && cd \
-    && rm 3.2.0.zip
+    && make install
 
-
-# Third: install and build opencv_contrib
-#
-RUN cd \
-    && wget https://github.com/opencv/opencv_contrib/archive/3.2.0.zip \
-    && unzip 3.2.0.zip \
-    && cd opencv-3.2.0/build \
-    && cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.2.0/modules/ .. \
-    && make -j8 \
-    && make install \
-    && cd ../.. \
-    && rm 3.2.0.zip
-
-
-# Forth: get and build the Learning OpenCV 3 examples:
-#    I copy the needed data to where the executables will be: opencv-3.2.0/build/bin
-#
-RUN cd \
-    && git clone https://github.com/oreillymedia/Learning-OpenCV-3_examples.git \
-    && cd Learning-OpenCV-3_examples \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
-    && make -j8
+RUN cd / && mkdir project
+COPY doc /project
+RUN cd project && ls && cmake CMakeLists.txt && make
+CMD ./project/main
+#CMD bash
 

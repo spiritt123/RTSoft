@@ -1,0 +1,3 @@
+/home/s/Desktop/RTSoft/task6/CMakeFiles/rebuild_cache.dir
+/home/s/Desktop/RTSoft/task6/CMakeFiles/edit_cache.dir
+/home/s/Desktop/RTSoft/task6/CMakeFiles/unittest.dir

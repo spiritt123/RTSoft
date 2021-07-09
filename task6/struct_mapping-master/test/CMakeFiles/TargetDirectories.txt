@@ -1,0 +1,4 @@
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/CMakeFiles/rebuild_cache.dir
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/CMakeFiles/edit_cache.dir
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/CMakeFiles/unittest.dir
+/home/s/Desktop/RTSoft/task6/struct_mapping-master/test/CMakeFiles/googletest.dir
