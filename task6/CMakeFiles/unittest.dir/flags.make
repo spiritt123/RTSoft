@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/s/Desktop/RTSoft/task6/SYSTEM -I/home/s/Desktop/RTSoft/task6/include -I/googletest/include -isystem /usr/local/include/opencv4 
+CXX_INCLUDES = -I/home/s/Desktop/RTSoft/task6/json-develop/include/nlohmann 
 

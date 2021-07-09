@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wpedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wconversion -Wsign-conversion -Wnull-dereference -Wformat=2 -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wno-sign-compare -ftemplate-backtrace-limit=0   CMakeFiles/struct.dir/struct/struct.cpp.o  -o ../bin/struct 

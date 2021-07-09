@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wpedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wconversion -Wsign-conversion -Wnull-dereference -Wformat=2 -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wno-sign-compare -ftemplate-backtrace-limit=0   CMakeFiles/map_like.dir/map_like/map_like.cpp.o  -o ../bin/map_like 

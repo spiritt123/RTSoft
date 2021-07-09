@@ -1,7 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/unittest.dir/main.cpp.o"
-  "CMakeFiles/unittest.dir/map_json_to_struct.cpp.o"
-  "CMakeFiles/unittest.dir/map_struct_to_json.cpp.o"
   "unittest"
   "unittest.pdb"
 )
