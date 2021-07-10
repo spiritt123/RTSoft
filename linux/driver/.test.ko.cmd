@@ -1,1 +1,0 @@
-cmd_/home/s/Desktop/RTSost/linux/driver/test.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id=sha1  -T ./scripts/module-common.lds -o /home/s/Desktop/RTSost/linux/driver/test.ko /home/s/Desktop/RTSost/linux/driver/test.o /home/s/Desktop/RTSost/linux/driver/test.mod.o;  true

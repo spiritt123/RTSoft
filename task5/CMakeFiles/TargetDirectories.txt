@@ -1,3 +1,0 @@
-/home/s/Desktop/RTSoft/task5/CMakeFiles/rebuild_cache.dir
-/home/s/Desktop/RTSoft/task5/CMakeFiles/edit_cache.dir
-/home/s/Desktop/RTSoft/task5/CMakeFiles/main.dir
