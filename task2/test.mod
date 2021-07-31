@@ -1,2 +1,2 @@
-/home/s/Desktop/RTSost/linux/driver/test.o
+/home/s/Desktop/RTSoft/task2/test.o
 
